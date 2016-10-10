@@ -2,15 +2,14 @@
 # This way, we keep these methods separated from other potential parts of the program
 
 def find(id)
-  # Your code Here
+  @candidates.select {|hash| hash[:id] === id}.first
 end
 
-def experienced?(candidate)
-  # Your code Here
-end
 
 def qualified_candidates(candidates)
-  # Your code Here
+  candidates = @candidates.select { |hash| hash[:years_of_experience] > 2 && hash[:github_points] >= 100 && ((hash[:languages].include? "Ruby") || (hash[:languages].include? "Python")) && (hash[:date_applied] > (Date.today - 14.days)) && hash[:age] > 17 }
 end
 
-# More methods will go below
+def sort_candidates(candidates)
+  candidates = @candidates.sort_by { |x| x[:years_of_experience] || x[:github_points] }.reverse
+end
